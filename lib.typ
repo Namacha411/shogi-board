@@ -55,7 +55,7 @@
   "         ",
   "PPPPPPPPP",
   " B     R ",
-  "NLGSKGSLN",
+  "NLSGKGSLN",
   sente: "PGS",
   gote: "pgs",
 )
