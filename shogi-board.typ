@@ -36,10 +36,28 @@
     " ": "",
   )
 
+  let gote-mochigoma = grid(
+    align: center + horizon,
+    stack(
+      dir: ttb,
+      spacing: 1em,
+      "⛊",
+      for ps in gote.chunks(4) {
+        stack(dir: ltr, ..ps.map(i => pieces.at(i)))
+      }))
+  let sente-mochigoma = grid(
+    align: center + horizon,
+    stack(
+      dir: ttb,
+      spacing: 1em,
+      "☗",
+      for ps in sente.chunks(4) {
+        stack(dir: ltr, ..ps.map(i => pieces.at(i)))
+      }))
+
   grid(
     columns: (auto, auto, auto),
-    stack(dir: ttb, spacing: 0.4em, "⛊",
-    ..gote.map(i => pieces.at(i))),
+    gote-mochigoma,
     pad(x: 1em,
       grid(
         columns: (1.5em,) * 10,
@@ -60,7 +78,7 @@
         }
       ),
     ),
-    stack(dir: ttb, spacing: 0.5em, "☗", ..sente.map(i => pieces.at(i))),
+    sente-mochigoma,
   )
 }
 
@@ -117,6 +135,12 @@
   arguments(ranks, sente: sente, gote: gote)
 }
 
+/// This function creates a shogi board from a SFEN string.
+///
+/// https://en.wikipedia.org/wiki/Shogi_notation#SFEN
+///
+/// - sfen (str): A SFEN string.
+/// -> content
 #let shogi-board-from-sfen(sfen) = {
   shogi-board(..sfen-kyokumen-parser(sfen))
 }
